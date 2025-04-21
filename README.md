@@ -1,4 +1,4 @@
-# ass12
+# Final Assignment of Mobile Application Development with Flutter
 
 A new Flutter project.
 
