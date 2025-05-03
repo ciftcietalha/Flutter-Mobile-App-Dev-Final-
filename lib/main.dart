@@ -1,11 +1,16 @@
 import 'package:ass12/weather_service.dart';
 import 'package:ass12/weatherpage.dart';
 import 'package:flutter/material.dart';
+import 'package:ass12/employee_detail_page.dart';
+import 'package:ass12/weather_service.dart';
 import 'package:ass12/lib/employee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter/services.dart';
+import 'employee.dart';
+
 
 // Main Function
 void main() {
@@ -183,62 +188,60 @@ class _SignUpPageState extends State<SignUpPage> {
 }
 
 // Employees Page
-class EmployeesPage extends StatelessWidget {
+Future<List<Employee>> fetchEmployees() async {
+  final String response = await rootBundle.loadString('lib/employee_detail_page.dart');
+  final List<dynamic> data = json.decode(response);
+  return data.map((json) => Employee.fromJson(json)).toList();
+}
+class EmployeesPage extends StatefulWidget {
+  @override
+  _EmployeesPageState createState() => _EmployeesPageState();
+}
+
+class _EmployeesPageState extends State<EmployeesPage> {
+  late Future<List<Employee>> futureEmployees;
+
+  @override
+  void initState() {
+    super.initState();
+    futureEmployees = fetchEmployees();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Employees'),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
-              child: Column(
-                children: [
-                  Image.asset("lib/assets/images/rsu_logo.png", height: 100), // Replace with your logo path
-                  FutureBuilder<SharedPreferences>(
-                    future: SharedPreferences.getInstance(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        String fullName = snapshot.data?.getString('fullName') ?? '';
-                        return Text(fullName, style: TextStyle(color: Colors.white, fontSize: 20));
-                      }
-                      return CircularProgressIndicator();
-                    },
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              title: Text('Employees'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-              },
-            ),
-            ListTile(
-              title: Text('Weather'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => WeatherPage()),
+      body: FutureBuilder<List<Employee>>(
+        future: futureEmployees,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            final employees = snapshot.data!;
+            return ListView.builder(
+              itemCount: employees.length,
+              itemBuilder: (context, index) {
+                final employee = employees[index];
+                return ListTile(
+                  title: Text(employee.name),
+                  subtitle: Text(employee.position),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EmployeeDetailPage(employee: employee),
+                      ),
+                    );
+                  },
                 );
               },
-            ),
-            ListTile(
-              title: Text('Exit'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-                // Optionally, you can add exit functionality here
-              },
-            ),
-          ],
-        ),
-      ),
-      body: Center(
-        child: Text('Welcome to the Employees Page!'),
+            );
+          }
+        },
       ),
     );
   }

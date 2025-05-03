@@ -3,6 +3,8 @@ import 'package:geolocator/geolocator.dart';
 import 'weather_service.dart'; // Import the WeatherService
 
 class WeatherPage extends StatelessWidget {
+  const WeatherPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -29,6 +31,8 @@ class WeatherPage extends StatelessWidget {
 }
 
 class CurrentWeatherTab extends StatefulWidget {
+  const CurrentWeatherTab({super.key});
+
   @override
   _CurrentWeatherTabState createState() => _CurrentWeatherTabState();
 }
@@ -91,6 +95,8 @@ class _CurrentWeatherTabState extends State<CurrentWeatherTab> {
 }
 
 class AirPollutionTab extends StatefulWidget {
+  const AirPollutionTab({super.key});
+
   @override
   _AirPollutionTabState createState() => _AirPollutionTabState();
 }

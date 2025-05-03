@@ -5,7 +5,8 @@
     "secretary": "Tudchadanan Krainara",
     "phone": "66-2791-5922",
     "fax": "66-2791-5931",
-    "email": "attawit@rsu.ac.th"
+    "email": "attawit@rsu.ac.th",
+    "pictureUrl": "lib/assets/images/1.jpg"
   },
   "2": {
     "name": "Mr. Kasin Chanruang",
@@ -13,7 +14,8 @@
     "secretary": "Paweena Makeyok",
     "phone": "66-2791-5923",
     "fax": "66-2791-5931",
-    "email": "kasin@rsu.ac.th"
+    "email": "kasin@rsu.ac.th",
+    "pictureUrl": "lib/assets/images/2.jpg"
   },
   "3": {
     "name": "Patamaporn Sukplang, Ph.D.",
@@ -21,7 +23,8 @@
     "secretary": "Phansaporn Thamtan",
     "phone": "66-2791-5556",
     "fax": "66-2791-5565",
-    "email": "-"
+    "email": "-",
+    "pictureUrl": "lib/assets/images/3.jpg"
   },
   "4": {
     "name": "Asst.Prof.Dr. Narupol Chaiyot",
@@ -29,7 +32,8 @@
     "secretary": "-",
     "phone": "-",
     "fax": "-",
-    "email": "narupol@rsu.ac.th"
+    "email": "narupol@rsu.ac.th",
+    "pictureUrl": "lib/assets/images/4.jpg"
   },
   "5": {
     "name": "Assoc.Prof.Dr. Grit Thonglert",
@@ -37,6 +41,7 @@
     "secretary": "Ms. Ratcha Satapornpong",
     "phone": "02-997-2200, 3900",
     "fax": "02-997-2200, 3909",
-    "email": "grit.t@rsu.ac.th"
+    "email": "grit.t@rsu.ac.th",
+    "pictureUrl": "lib/assets/images/5.jpg"
   }
 }
