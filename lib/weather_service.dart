@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 
 class WeatherService {
-  final String apiKey = '5c3de524db2122e23f59d3434974f63f'; // Replace with your OpenWeatherMap API key
+  final String apiKey = "API KEY HERE"; // Replace with your OpenWeatherMap API key
 
   Future<Map<String, dynamic>> getCurrentWeather(double lat, double lon) async {
     final response = await http.get(
